@@ -1,0 +1,48 @@
+{
+  "name": "noce-florale",
+  "version": "1.0.0",
+  "description": "Wedding RSVP Application",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "sync-port": "node scripts/update-port.js",
+    "dev": "NODE_ENV=development npm run dev:all",
+    "prod": "NODE_ENV=production npm start",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "NODE_ENV=development cd backend && npm run dev",
+    "dev:frontend:alt": "cd frontend && PORT=3002 npm run dev",
+    "dev:backend:alt": "NODE_ENV=development cd backend && PORT=4002 npm run dev",
+    "prod:backend": "NODE_ENV=production node backend/server.js",
+    "dev:all": "concurrently \"npm run dev:backend\" \"npm run sync-port && npm run dev:frontend\"",
+    "dev:all:alt": "concurrently \"npm run dev:backend:alt\" \"npm run dev:frontend:alt\"",
+    "build": "npm install && npm run install:backend && npm run install:frontend && npm run clean && npm run build:backend && npm run build:frontend && npm run postbuild",
+    "clean": "rm -rf backend/public/* frontend/out frontend/.next",
+    "build:dev": "NODE_ENV=development npm run build",
+    "build:prod": "NODE_ENV=production npm run build",
+    "start": "node backend/server.js",
+    "install:frontend": "cd frontend && npm install critters && npm install",
+    "install:backend": "cd backend && npm install",
+    "build:backend": "cd backend && npm run build",
+    "build:frontend": "cd frontend && NEXT_PUBLIC_API_URL=https://noce-florale.onrender.com/graphql NODE_ENV=production npm run build",
+    "build:frontend:dev": "cd frontend && NEXT_PUBLIC_API_URL=http://localhost:4000/graphql NODE_ENV=development npm run build",
+    "build:frontend:prod": "cd frontend && NEXT_PUBLIC_API_URL=/graphql NODE_ENV=production npm run build",
+    "postbuild": "echo \"Starting postbuild process...\" && mkdir -p backend/public && echo \"Copying static export...\" && cp -r frontend/out/. backend/public/ && echo \"Postbuild completed successfully. Static site exported to backend/public/\"",
+    "switch:dev": "echo 'Switching to development mode' && export NODE_ENV=development && echo 'NODE_ENV is now set to development'",
+    "switch:prod": "echo 'Switching to production mode' && export NODE_ENV=production && echo 'NODE_ENV is now set to production'"
+  },
+  "keywords": [
+    "wedding",
+    "rsvp",
+    "nextjs",
+    "graphql",
+    "mongodb"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

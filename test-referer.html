@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Referer Header Validation Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #4a5568;
+            margin-bottom: 20px;
+        }
+        .card {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            background-color: #4299e1;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #3182ce;
+        }
+        pre {
+            background-color: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            padding: 15px;
+            overflow: auto;
+            max-height: 300px;
+            font-size: 14px;
+        }
+        .success {
+            color: #48bb78;
+            font-weight: bold;
+        }
+        .error {
+            color: #f56565;
+            font-weight: bold;
+        }
+        .loading {
+            color: #ed8936;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Referer Header Validation Test</h1>
+    
+    <div class="card">
+        <h2>Test Configuration</h2>
+        <div>
+            <label for="server-url">GraphQL Server URL:</label>
+            <input type="text" id="server-url" value="http://localhost:4000/graphql">
+        </div>
+        <div>
+            <label for="referer-header">Referer Header:</label>
+            <input type="text" id="referer-header" value="http://localhost:3000/rsvp">
+        </div>
+        <p><em>Note: Changing the Referer header here won't actually affect the real header sent by your browser. 
+            This is for demonstration purposes only. To really test with different Referer values, use the shell script.</em></p>
+    </div>
+
+    <div class="card">
+        <h2>RSVP Submission Test</h2>
+        <div>
+            <label for="first-name">First Name:</label>
+            <input type="text" id="first-name" value="Test">
+        </div>
+        <div>
+            <label for="last-name">Last Name:</label>
+            <input type="text" id="last-name" value="User">
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" value="test-referer@example.com">
+        </div>
+        <div>
+            <label for="attending">Attending:</label>
+            <select id="attending">
+                <option value="attending">Yes</option>
+                <option value="not_attending">No</option>
+            </select>
+        </div>
+        <div>
+            <label for="guest-type">Guest Type:</label>
+            <select id="guest-type">
+                <option value="single">Single</option>
+                <option value="couple">Couple</option>
+            </select>
+        </div>
+        <div>
+            <label for="event-participation">Event Participation:</label>
+            <select id="event-participation">
+                <option value="both">Both Ceremony & Reception</option>
+                <option value="blessing_only">Ceremony Only</option>
+                <option value="evening_only">Reception Only</option>
+            </select>
+        </div>
+        
+        <button id="submit-btn">Submit Test RSVP</button>
+        <button id="submit-iframe" style="background-color: #805ad5;">Test via iFrame (Simulate Embedding)</button>
+    </div>
+    
+    <div class="card">
+        <h2>Response</h2>
+        <div id="response-status"></div>
+        <pre id="response-data">No test run yet.</pre>
+    </div>
+
+    <div id="iframe-container" style="display:none;">
+        <h2>iFrame Test</h2>
+        <iframe id="test-iframe" style="width:100%; height:300px; border:1px solid #ccc;"></iframe>
+    </div>
+
+    <script>
+        // Generate a unique email each time
+        document.getElementById('email').value = `test-referer-${Date.now()}@example.com`;
+
+        // Submit form via direct API call
+        document.getElementById('submit-btn').addEventListener('click', async () => {
+            const responseStatus = document.getElementById('response-status');
+            const responseData = document.getElementById('response-data');
+            
+            responseStatus.innerHTML = '<span class="loading">Testing...</span>';
+            responseData.textContent = 'Submitting request...';
+            
+            try {
+                const serverUrl = document.getElementById('server-url').value;
+                const firstName = document.getElementById('first-name').value;
+                const lastName = document.getElementById('last-name').value;
+                const email = document.getElementById('email').value;
+                const attending = document.getElementById('attending').value;
+                const guestType = document.getElementById('guest-type').value;
+                const eventParticipation = document.getElementById('event-participation').value;
+
+                // Create the GraphQL mutation
+                const mutation = `
+                    mutation {
+                        createRsvp(guest: {
+                            firstName: "${firstName}"
+                            lastName: "${lastName}"
+                            email: "${email}"
+                            attending: "${attending}"
+                            guestType: "${guestType}"
+                            eventParticipation: "${eventParticipation}"
+                        }) {
+                            id
+                            firstName
+                            lastName
+                            email
+                        }
+                    }
+                `;
+
+                // Send the request
+                const response = await fetch(serverUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        // Note: We can't manually set the Referer header due to browser security restrictions
+                    },
+                    body: JSON.stringify({ query: mutation })
+                });
+
+                const result = await response.json();
+                
+                if (result.errors) {
+                    // Check for referer validation error
+                    const refererError = result.errors.find(err => 
+                        err.message.includes("Invalid request origin") ||
+                        (err.extensions?.code === "INVALID_REFERER")
+                    );
+                    
+                    if (refererError) {
+                        responseStatus.innerHTML = '<span class="error">Test Failed: Referer validation error</span>';
+                    } else {
+                        responseStatus.innerHTML = '<span class="error">Test Failed: Other GraphQL error</span>';
+                    }
+                } else {
+                    responseStatus.innerHTML = '<span class="success">Test Passed: RSVP submitted successfully</span>';
+                }
+                
+                // Display the full response
+                responseData.textContent = JSON.stringify(result, null, 2);
+                
+            } catch (error) {
+                responseStatus.innerHTML = '<span class="error">Test Failed: Network or execution error</span>';
+                responseData.textContent = error.toString();
+            }
+        });
+
+        // Test via iFrame (simulate a form being embedded on another site)
+        document.getElementById('submit-iframe').addEventListener('click', () => {
+            const iframeContainer = document.getElementById('iframe-container');
+            const iframe = document.getElementById('test-iframe');
+            const serverUrl = document.getElementById('server-url').value.replace('/graphql', '');
+            
+            iframeContainer.style.display = 'block';
+            
+            // Create a simple HTML form inside the iframe that submits to our server
+            const iframeContent = `
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Embedded RSVP Form</title>
+                    <style>
+                        body { font-family: Arial; padding: 20px; }
+                        input, button { margin: 5px; padding: 8px; }
+                    </style>
+                </head>
+                <body>
+                    <h2>Embedded RSVP Form</h2>
+                    <p>This simulates a malicious site embedding your form.</p>
+                    <p>Note: This is just a demonstration. The actual test should be done with curl as shown in the shell script.</p>
+                    <form id="rsvp-form">
+                        <input type="text" name="firstName" value="Embedded" placeholder="First Name"><br>
+                        <input type="text" name="lastName" value="Test" placeholder="Last Name"><br>
+                        <input type="email" name="email" value="embedded-test@example.com" placeholder="Email"><br>
+                        <button type="submit">Submit</button>
+                    </form>
+                    <div id="result"></div>
+                    
+                    <script>
+                        document.getElementById('rsvp-form').addEventListener('submit', async (e) => {
+                            e.preventDefault();
+                            const result = document.getElementById('result');
+                            
+                            try {
+                                const response = await fetch('${serverUrl}/graphql', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({
+                                        query: \`
+                                            mutation {
+                                                createRsvp(guest: {
+                                                    firstName: "Embedded"
+                                                    lastName: "Test"
+                                                    email: "embedded-test-\${Date.now()}@example.com"
+                                                    attending: "attending"
+                                                    guestType: "single"
+                                                    eventParticipation: "both"
+                                                }) {
+                                                    id
+                                                }
+                                            }
+                                        \`
+                                    })
+                                });
+                                
+                                const data = await response.json();
+                                if (data.errors) {
+                                    result.innerHTML = '<p style="color:red">Error: ' + data.errors[0].message + '</p>';
+                                } else {
+                                    result.innerHTML = '<p style="color:green">Success! This suggests the Referer validation is not working.</p>';
+                                }
+                            } catch (error) {
+                                result.innerHTML = '<p style="color:red">Error: ' + error.message + '</p>';
+                            }
+                        });
+                    </script>
+                </body>
+                </html>
+            `;
+            
+            // Set the iframe content
+            iframe.srcdoc = iframeContent;
+        });
+    </script>
+</body>
+</html>

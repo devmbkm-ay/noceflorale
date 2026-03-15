@@ -1,0 +1,721 @@
+
+> noce-florale@1.0.0 dev
+> NODE_ENV=development npm run dev:all
+
+
+> noce-florale@1.0.0 dev:all
+> concurrently "npm run dev:backend" "npm run sync-port && npm run dev:frontend"
+
+[0] 
+[0] > noce-florale@1.0.0 dev:backend
+[0] > NODE_ENV=development cd backend && npm run dev
+[0] 
+[1] 
+[1] > noce-florale@1.0.0 sync-port
+[1] > node scripts/update-port.js
+[1] 
+[1] 🔄 Synchronizing port configuration...
+[1] 📊 Current port: 4001
+[1] ✅ Updated .env.local with port 4001
+[1] ✅ Updated apollo-client.ts with port 4001
+[1] ✨ Port configuration synchronized successfully!
+[1] 🚀 Remember to restart your frontend application for changes to take effect.
+[0] 
+[0] > noce-florale-backend@1.0.0 dev
+[0] > nodemon server.js -p ${PORT:-4000}
+[0] 
+[1] 
+[1] > noce-florale@1.0.0 dev:frontend
+[1] > cd frontend && npm run dev
+[1] 
+[0] [33m[nodemon] 3.1.10[39m
+[0] [33m[nodemon] to restart at any time, enter `rs`[39m
+[0] [33m[nodemon] watching path(s): *.*[39m
+[0] [33m[nodemon] watching extensions: js,mjs,cjs,json[39m
+[0] [32m[nodemon] starting `node server.js -p 4000`[39m
+[1] 
+[1] > noceflorale@0.1.0 dev
+[1] > next dev -p ${PORT:-3000}
+[1] 
+[0] CORS configured for origins: http://localhost:3000, http://localhost:3001
+[0] Cookie secure setting: disabled (development environment)
+[1] Using Next.js config for development
+[0] [32m📂 Scanning static content in /home/agnes/Ricardo/WEDDING/noceflorale/backend/public[0m
+[0] [32m📄 Found 18 files/directories in public directory:[0m
+[0] [36m   - File: 404.html (9751 bytes)[0m
+[0] [36m   - Directory: _next/[0m
+[0] [36m   - Directory: admin/[0m
+[0] [36m   - File: admin.html (9258 bytes)[0m
+[0] [36m   - File: admin.txt (5388 bytes)[0m
+[0] [36m   - File: favicon.ico (25931 bytes)[0m
+[0] [36m   - File: file.svg (391 bytes)[0m
+[0] [36m   - File: globe.svg (1035 bytes)[0m
+[0] [36m   - Directory: images/[0m
+[0] [36m   - File: index.html (76641 bytes)[0m
+[0] [36m   - File: index.txt (4516 bytes)[0m
+[0] [36m   - File: login.html (8642 bytes)[0m
+[0] [36m   - File: login.txt (4684 bytes)[0m
+[0] [36m   - Directory: media/[0m
+[0] [36m   - File: next.svg (1375 bytes)[0m
+[0] [36m   - File: placeholder.jpg (11 bytes)[0m
+[0] [36m   - File: vercel.svg (128 bytes)[0m
+[0] [36m   - File: window.svg (385 bytes)[0m
+[0] Running in DEVELOPMENT mode
+[0] Server port: 4000
+[0] CORS origins: http://localhost:3000, http://localhost:3001
+[0] Running in DEVELOPMENT mode - will proxy frontend requests to Next.js dev server
+[1] Using Next.js config for development
+[1]    ▲ Next.js 15.2.4
+[1]    - Local:        http://localhost:3000
+[1]    - Network:      http://192.168.1.183:3000
+[1]    - Environments: .env.local, .env.development, .env
+[1]    - Experiments (use with caution):
+[1]      ✓ optimizeCss
+[1] 
+[1]  ✓ Starting...
+[0] MongoDB Connected: ac-3epoehk-shard-00-02.bnpgltz.mongodb.net
+[0] 🌱 Running seed data...
+[0] 🌱 Starting database seed process...
+[0] 🗓️ Database already has 6 schedule items, skipping seed.
+[0] 💒 Wedding details already exist, skipping seed.
+[0] ✅ Seed process completed!
+[0] ℹ️  Attempting to start server on port 4000
+[0] 🚀 Server running in development mode
+[0] 🚀 GraphQL endpoint: http://localhost:4000/graphql
+[0] 🚀 Frontend app: http://localhost:4000
+[0] ℹ️  Port information saved to backend/current-port.txt
+[1]  ✓ Ready in 3.6s
+[0] ⚠️ No valid SMTP credentials found. Creating test account for development.
+[0] ❌ Error creating test email account: TypeError: nodemailer.createTransporter is not a function
+[0]     at createEmailTransporter (file:///home/agnes/Ricardo/WEDDING/noceflorale/backend/utils/emailService.js:16:38)
+[0]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[0]     at async sendFeedbackEmail (file:///home/agnes/Ricardo/WEDDING/noceflorale/backend/utils/emailService.js:185:23)
+[0]     at async Object.sendFeedbackToGuest (file:///home/agnes/Ricardo/WEDDING/noceflorale/backend/graphql/resolvers/rsvp.js:784:24)
+[0] Error sending feedback email: Error: Email transporter is not configured. Please check your SMTP settings.
+[0]     at sendFeedbackEmail (file:///home/agnes/Ricardo/WEDDING/noceflorale/backend/utils/emailService.js:188:11)
+[0]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[0]     at async Object.sendFeedbackToGuest (file:///home/agnes/Ricardo/WEDDING/noceflorale/backend/graphql/resolvers/rsvp.js:784:24)
+[0] ⚠️ No valid SMTP credentials found. Creating test account for development.
+[0] ❌ Error creating test email account: TypeError: nodemailer.createTransporter is not a function
+[0]     at createEmailTransporter (file:///home/agnes/Ricardo/WEDDING/noceflorale/backend/utils/emailService.js:16:38)
+[0]     at async sendFeedbackEmail (file:///home/agnes/Ricardo/WEDDING/noceflorale/backend/utils/emailService.js:185:23)
+[0]     at async Object.sendFeedbackToGuest (file:///home/agnes/Ricardo/WEDDING/noceflorale/backend/graphql/resolvers/rsvp.js:784:24)
+[0] Error sending feedback email: Error: Email transporter is not configured. Please check your SMTP settings.
+[0]     at sendFeedbackEmail (file:///home/agnes/Ricardo/WEDDING/noceflorale/backend/utils/emailService.js:188:11)
+[0]     at async Object.sendFeedbackToGuest (file:///home/agnes/Ricardo/WEDDING/noceflorale/backend/graphql/resolvers/rsvp.js:784:24)
+[1]  ○ Compiling /admin/guests ...
+[1]  ✓ Compiled /admin/guests in 9.1s (1988 modules)
+[1]  GET /admin/guests 200 in 10655ms
+[1]  ○ Compiling /_not-found ...
+[1]  ✓ Compiled /_not-found in 3.1s (1992 modules)
+[1]  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 3627ms
+[1]  ○ Compiling /favicon.ico ...
+[1]  ✓ Compiled /favicon.ico in 2.2s (1994 modules)
+[1]  GET /admin-avatar.jpg 404 in 2018ms
+[1]  GET /favicon.ico 200 in 3013ms
+[1]  GET /favicon.ico 200 in 213ms
+[1]    Reload env: .env.local
+[1]  ✓ Compiled in 1999ms (2008 modules)
+[0] Fixed missing id for RSVP with _id 6859e25dada948a7ef42f1c1
+[0] Fixed missing id for RSVP with _id 68579358b2dc35e4e08dc0a8
+[0] Fixed missing id for RSVP with _id 68578ca2369d71a3a72e64b3
+[0] Fixed missing id for RSVP with _id 68577fd0c5509e3e0333a950
+[0] Fixed missing id for RSVP with _id 68555faa01755f6f59bff6c5
+[0] Fixed missing id for RSVP with _id 6851f47c744387bd6a27515f
+[0] Fixed missing id for RSVP with _id 6851e3dc876b4618cdb3c779
+[0] Fixed missing id for RSVP with _id 68509778fb80a5acdaabdd1b
+[0] Fixed missing id for RSVP with _id 683db7a3de654e95b03579dd
+[0] Fixed missing firstName for RSVP with id 683db7a3de654e95b03579dd
+[0] Fixed missing lastName for RSVP with id 683db7a3de654e95b03579dd
+[0] Fixed missing id for RSVP with _id 6827c55183dab120033598fc
+[0] Fixed missing firstName for RSVP with id 6827c55183dab120033598fc
+[0] Fixed missing lastName for RSVP with id 6827c55183dab120033598fc
+[0] Fixed missing id for RSVP with _id 68279a3a83dab120033598b4
+[0] Fixed missing firstName for RSVP with id 68279a3a83dab120033598b4
+[0] Fixed missing lastName for RSVP with id 68279a3a83dab120033598b4
+[0] Fixed missing id for RSVP with _id 6827948a83dab120033598a8
+[0] Fixed missing firstName for RSVP with id 6827948a83dab120033598a8
+[0] Fixed missing lastName for RSVP with id 6827948a83dab120033598a8
+[0] Fixed missing id for RSVP with _id 6825c298d9d217c2636334f4
+[0] Fixed missing firstName for RSVP with id 6825c298d9d217c2636334f4
+[0] Fixed missing lastName for RSVP with id 6825c298d9d217c2636334f4
+[0] Fixed missing id for RSVP with _id 68232cc6f0a19fb98f98e557
+[0] Fixed missing firstName for RSVP with id 68232cc6f0a19fb98f98e557
+[0] Fixed missing lastName for RSVP with id 68232cc6f0a19fb98f98e557
+[0] Fixed missing id for RSVP with _id 68231b95f0a19fb98f98e531
+[0] Fixed missing firstName for RSVP with id 68231b95f0a19fb98f98e531
+[0] Fixed missing lastName for RSVP with id 68231b95f0a19fb98f98e531
+[0] Fixed missing id for RSVP with _id 68231756f0a19fb98f98e4fe
+[0] Fixed missing firstName for RSVP with id 68231756f0a19fb98f98e4fe
+[0] Fixed missing lastName for RSVP with id 68231756f0a19fb98f98e4fe
+[0] Fixed missing id for RSVP with _id 6859e25dada948a7ef42f1c1
+[0] Fixed missing id for RSVP with _id 68579358b2dc35e4e08dc0a8
+[0] Fixed missing id for RSVP with _id 68578ca2369d71a3a72e64b3
+[0] Fixed missing id for RSVP with _id 68577fd0c5509e3e0333a950
+[0] Fixed missing id for RSVP with _id 68555faa01755f6f59bff6c5
+[0] Fixed missing id for RSVP with _id 6851f47c744387bd6a27515f
+[0] Fixed missing id for RSVP with _id 6851e3dc876b4618cdb3c779
+[0] Fixed missing id for RSVP with _id 68509778fb80a5acdaabdd1b
+[0] Fixed missing id for RSVP with _id 683db7a3de654e95b03579dd
+[0] Fixed missing firstName for RSVP with id 683db7a3de654e95b03579dd
+[0] Fixed missing lastName for RSVP with id 683db7a3de654e95b03579dd
+[0] Fixed missing id for RSVP with _id 6827c55183dab120033598fc
+[0] Fixed missing firstName for RSVP with id 6827c55183dab120033598fc
+[0] Fixed missing lastName for RSVP with id 6827c55183dab120033598fc
+[0] Fixed missing id for RSVP with _id 68279a3a83dab120033598b4
+[0] Fixed missing firstName for RSVP with id 68279a3a83dab120033598b4
+[0] Fixed missing lastName for RSVP with id 68279a3a83dab120033598b4
+[0] Fixed missing id for RSVP with _id 6827948a83dab120033598a8
+[0] Fixed missing firstName for RSVP with id 6827948a83dab120033598a8
+[0] Fixed missing lastName for RSVP with id 6827948a83dab120033598a8
+[0] Fixed missing id for RSVP with _id 6825c298d9d217c2636334f4
+[0] Fixed missing firstName for RSVP with id 6825c298d9d217c2636334f4
+[0] Fixed missing lastName for RSVP with id 6825c298d9d217c2636334f4
+[0] Fixed missing id for RSVP with _id 68232cc6f0a19fb98f98e557
+[0] Fixed missing firstName for RSVP with id 68232cc6f0a19fb98f98e557
+[0] Fixed missing lastName for RSVP with id 68232cc6f0a19fb98f98e557
+[0] Fixed missing id for RSVP with _id 68231b95f0a19fb98f98e531
+[0] Fixed missing firstName for RSVP with id 68231b95f0a19fb98f98e531
+[0] Fixed missing lastName for RSVP with id 68231b95f0a19fb98f98e531
+[0] Fixed missing id for RSVP with _id 68231756f0a19fb98f98e4fe
+[0] Fixed missing firstName for RSVP with id 68231756f0a19fb98f98e4fe
+[0] Fixed missing lastName for RSVP with id 68231756f0a19fb98f98e4fe
+[1]  GET /admin/guests 200 in 350ms
+[1]  GET /favicon.ico 200 in 259ms
+[1]  GET /admin/guests 200 in 498ms
+[1]  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 119ms
+[1]  GET /favicon.ico 200 in 222ms
+[1]  GET /admin-avatar.jpg 404 in 67ms
+[0] Fixed missing id for RSVP with _id 6859e25dada948a7ef42f1c1
+[0] Fixed missing id for RSVP with _id 68579358b2dc35e4e08dc0a8
+[0] Fixed missing id for RSVP with _id 68578ca2369d71a3a72e64b3
+[0] Fixed missing id for RSVP with _id 68577fd0c5509e3e0333a950
+[0] Fixed missing id for RSVP with _id 68555faa01755f6f59bff6c5
+[0] Fixed missing id for RSVP with _id 6851f47c744387bd6a27515f
+[0] Fixed missing id for RSVP with _id 6851e3dc876b4618cdb3c779
+[0] Fixed missing id for RSVP with _id 68509778fb80a5acdaabdd1b
+[0] Fixed missing id for RSVP with _id 683db7a3de654e95b03579dd
+[0] Fixed missing firstName for RSVP with id 683db7a3de654e95b03579dd
+[0] Fixed missing lastName for RSVP with id 683db7a3de654e95b03579dd
+[0] Fixed missing id for RSVP with _id 6827c55183dab120033598fc
+[0] Fixed missing firstName for RSVP with id 6827c55183dab120033598fc
+[0] Fixed missing lastName for RSVP with id 6827c55183dab120033598fc
+[0] Fixed missing id for RSVP with _id 68279a3a83dab120033598b4
+[0] Fixed missing firstName for RSVP with id 68279a3a83dab120033598b4
+[0] Fixed missing lastName for RSVP with id 68279a3a83dab120033598b4
+[0] Fixed missing id for RSVP with _id 6827948a83dab120033598a8
+[0] Fixed missing firstName for RSVP with id 6827948a83dab120033598a8
+[0] Fixed missing lastName for RSVP with id 6827948a83dab120033598a8
+[0] Fixed missing id for RSVP with _id 6825c298d9d217c2636334f4
+[0] Fixed missing firstName for RSVP with id 6825c298d9d217c2636334f4
+[0] Fixed missing lastName for RSVP with id 6825c298d9d217c2636334f4
+[0] Fixed missing id for RSVP with _id 68232cc6f0a19fb98f98e557
+[0] Fixed missing firstName for RSVP with id 68232cc6f0a19fb98f98e557
+[0] Fixed missing lastName for RSVP with id 68232cc6f0a19fb98f98e557
+[0] Fixed missing id for RSVP with _id 68231b95f0a19fb98f98e531
+[0] Fixed missing firstName for RSVP with id 68231b95f0a19fb98f98e531
+[0] Fixed missing lastName for RSVP with id 68231b95f0a19fb98f98e531
+[0] Fixed missing id for RSVP with _id 68231756f0a19fb98f98e4fe
+[0] Fixed missing firstName for RSVP with id 68231756f0a19fb98f98e4fe
+[0] Fixed missing lastName for RSVP with id 68231756f0a19fb98f98e4fe
+[0] Fixed missing id for RSVP with _id 6859e25dada948a7ef42f1c1
+[0] Fixed missing id for RSVP with _id 68579358b2dc35e4e08dc0a8
+[0] Fixed missing id for RSVP with _id 68578ca2369d71a3a72e64b3
+[0] Fixed missing id for RSVP with _id 68577fd0c5509e3e0333a950
+[0] Fixed missing id for RSVP with _id 68555faa01755f6f59bff6c5
+[0] Fixed missing id for RSVP with _id 6851f47c744387bd6a27515f
+[0] Fixed missing id for RSVP with _id 6851e3dc876b4618cdb3c779
+[0] Fixed missing id for RSVP with _id 68509778fb80a5acdaabdd1b
+[0] Fixed missing id for RSVP with _id 683db7a3de654e95b03579dd
+[0] Fixed missing firstName for RSVP with id 683db7a3de654e95b03579dd
+[0] Fixed missing lastName for RSVP with id 683db7a3de654e95b03579dd
+[0] Fixed missing id for RSVP with _id 6827c55183dab120033598fc
+[0] Fixed missing firstName for RSVP with id 6827c55183dab120033598fc
+[0] Fixed missing lastName for RSVP with id 6827c55183dab120033598fc
+[0] Fixed missing id for RSVP with _id 68279a3a83dab120033598b4
+[0] Fixed missing firstName for RSVP with id 68279a3a83dab120033598b4
+[0] Fixed missing lastName for RSVP with id 68279a3a83dab120033598b4
+[0] Fixed missing id for RSVP with _id 6827948a83dab120033598a8
+[0] Fixed missing firstName for RSVP with id 6827948a83dab120033598a8
+[0] Fixed missing lastName for RSVP with id 6827948a83dab120033598a8
+[0] Fixed missing id for RSVP with _id 6825c298d9d217c2636334f4
+[0] Fixed missing firstName for RSVP with id 6825c298d9d217c2636334f4
+[0] Fixed missing lastName for RSVP with id 6825c298d9d217c2636334f4
+[0] Fixed missing id for RSVP with _id 68232cc6f0a19fb98f98e557
+[0] Fixed missing firstName for RSVP with id 68232cc6f0a19fb98f98e557
+[0] Fixed missing lastName for RSVP with id 68232cc6f0a19fb98f98e557
+[0] Fixed missing id for RSVP with _id 68231b95f0a19fb98f98e531
+[0] Fixed missing firstName for RSVP with id 68231b95f0a19fb98f98e531
+[0] Fixed missing lastName for RSVP with id 68231b95f0a19fb98f98e531
+[0] Fixed missing id for RSVP with _id 68231756f0a19fb98f98e4fe
+[0] Fixed missing firstName for RSVP with id 68231756f0a19fb98f98e4fe
+[0] Fixed missing lastName for RSVP with id 68231756f0a19fb98f98e4fe
+[1]  GET /favicon.ico 200 in 228ms
+[0] Validating and normalizing RSVP data: {
+[0]   "firstName": "Aymard",
+[0]   "lastName": "MBOUKOU",
+[0]   "email": "ricardomboukou@gmail.com",
+[0]   "telephone": "0648475221",
+[0]   "attending": "attending",
+[0]   "guestType": "couple",
+[0]   "eventParticipation": "both",
+[0]   "hasChildren": false,
+[0]   "childrenCount": 0,
+[0]   "children": []
+[0] }
+[0] Normalized RSVP data result: {
+[0]   "firstName": "Aymard",
+[0]   "lastName": "MBOUKOU",
+[0]   "email": "ricardomboukou@gmail.com",
+[0]   "telephone": "0648475221",
+[0]   "attending": "attending",
+[0]   "guestType": "couple",
+[0]   "eventParticipation": "both",
+[0]   "hasChildren": false,
+[0]   "childrenCount": 0,
+[0]   "children": []
+[0] }
+[0] Fixed missing id for RSVP with _id 6859e25dada948a7ef42f1c1
+[0] Fixed missing id for RSVP with _id 68579358b2dc35e4e08dc0a8
+[0] Fixed missing id for RSVP with _id 68578ca2369d71a3a72e64b3
+[0] Fixed missing id for RSVP with _id 68577fd0c5509e3e0333a950
+[0] Fixed missing id for RSVP with _id 68555faa01755f6f59bff6c5
+[0] Fixed missing id for RSVP with _id 6851f47c744387bd6a27515f
+[0] Fixed missing id for RSVP with _id 6851e3dc876b4618cdb3c779
+[0] Fixed missing id for RSVP with _id 68509778fb80a5acdaabdd1b
+[0] Fixed missing id for RSVP with _id 683db7a3de654e95b03579dd
+[0] Fixed missing firstName for RSVP with id 683db7a3de654e95b03579dd
+[0] Fixed missing lastName for RSVP with id 683db7a3de654e95b03579dd
+[0] Fixed missing id for RSVP with _id 6827c55183dab120033598fc
+[0] Fixed missing firstName for RSVP with id 6827c55183dab120033598fc
+[0] Fixed missing lastName for RSVP with id 6827c55183dab120033598fc
+[0] Fixed missing id for RSVP with _id 68279a3a83dab120033598b4
+[0] Fixed missing firstName for RSVP with id 68279a3a83dab120033598b4
+[0] Fixed missing lastName for RSVP with id 68279a3a83dab120033598b4
+[0] Fixed missing id for RSVP with _id 6827948a83dab120033598a8
+[0] Fixed missing firstName for RSVP with id 6827948a83dab120033598a8
+[0] Fixed missing lastName for RSVP with id 6827948a83dab120033598a8
+[0] Fixed missing id for RSVP with _id 6825c298d9d217c2636334f4
+[0] Fixed missing firstName for RSVP with id 6825c298d9d217c2636334f4
+[0] Fixed missing lastName for RSVP with id 6825c298d9d217c2636334f4
+[0] Fixed missing id for RSVP with _id 68232cc6f0a19fb98f98e557
+[0] Fixed missing firstName for RSVP with id 68232cc6f0a19fb98f98e557
+[0] Fixed missing lastName for RSVP with id 68232cc6f0a19fb98f98e557
+[0] Fixed missing id for RSVP with _id 68231b95f0a19fb98f98e531
+[0] Fixed missing firstName for RSVP with id 68231b95f0a19fb98f98e531
+[0] Fixed missing lastName for RSVP with id 68231b95f0a19fb98f98e531
+[0] Fixed missing id for RSVP with _id 68231756f0a19fb98f98e4fe
+[0] Fixed missing firstName for RSVP with id 68231756f0a19fb98f98e4fe
+[0] Fixed missing lastName for RSVP with id 68231756f0a19fb98f98e4fe
+[1]  GET /admin/guests 200 in 107ms
+[1]  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 83ms
+[1]  GET /favicon.ico 200 in 259ms
+[1]  GET /admin-avatar.jpg 404 in 96ms
+[0] Fixed missing id for RSVP with _id 6859e25dada948a7ef42f1c1
+[0] Fixed missing id for RSVP with _id 68579358b2dc35e4e08dc0a8
+[0] Fixed missing id for RSVP with _id 68578ca2369d71a3a72e64b3
+[0] Fixed missing id for RSVP with _id 68577fd0c5509e3e0333a950
+[0] Fixed missing id for RSVP with _id 68555faa01755f6f59bff6c5
+[0] Fixed missing id for RSVP with _id 6851f47c744387bd6a27515f
+[0] Fixed missing id for RSVP with _id 6851e3dc876b4618cdb3c779
+[0] Fixed missing id for RSVP with _id 68509778fb80a5acdaabdd1b
+[0] Fixed missing id for RSVP with _id 683db7a3de654e95b03579dd
+[0] Fixed missing firstName for RSVP with id 683db7a3de654e95b03579dd
+[0] Fixed missing lastName for RSVP with id 683db7a3de654e95b03579dd
+[0] Fixed missing id for RSVP with _id 6827c55183dab120033598fc
+[0] Fixed missing firstName for RSVP with id 6827c55183dab120033598fc
+[0] Fixed missing lastName for RSVP with id 6827c55183dab120033598fc
+[0] Fixed missing id for RSVP with _id 68279a3a83dab120033598b4
+[0] Fixed missing firstName for RSVP with id 68279a3a83dab120033598b4
+[0] Fixed missing lastName for RSVP with id 68279a3a83dab120033598b4
+[0] Fixed missing id for RSVP with _id 6827948a83dab120033598a8
+[0] Fixed missing firstName for RSVP with id 6827948a83dab120033598a8
+[0] Fixed missing lastName for RSVP with id 6827948a83dab120033598a8
+[0] Fixed missing id for RSVP with _id 6825c298d9d217c2636334f4
+[0] Fixed missing firstName for RSVP with id 6825c298d9d217c2636334f4
+[0] Fixed missing lastName for RSVP with id 6825c298d9d217c2636334f4
+[0] Fixed missing id for RSVP with _id 68232cc6f0a19fb98f98e557
+[0] Fixed missing firstName for RSVP with id 68232cc6f0a19fb98f98e557
+[0] Fixed missing lastName for RSVP with id 68232cc6f0a19fb98f98e557
+[0] Fixed missing id for RSVP with _id 68231b95f0a19fb98f98e531
+[0] Fixed missing firstName for RSVP with id 68231b95f0a19fb98f98e531
+[0] Fixed missing lastName for RSVP with id 68231b95f0a19fb98f98e531
+[0] Fixed missing id for RSVP with _id 68231756f0a19fb98f98e4fe
+[0] Fixed missing firstName for RSVP with id 68231756f0a19fb98f98e4fe
+[0] Fixed missing lastName for RSVP with id 68231756f0a19fb98f98e4fe
+[0] Fixed missing id for RSVP with _id 6859e25dada948a7ef42f1c1
+[0] Fixed missing id for RSVP with _id 68579358b2dc35e4e08dc0a8
+[0] Fixed missing id for RSVP with _id 68578ca2369d71a3a72e64b3
+[0] Fixed missing id for RSVP with _id 68577fd0c5509e3e0333a950
+[0] Fixed missing id for RSVP with _id 68555faa01755f6f59bff6c5
+[0] Fixed missing id for RSVP with _id 6851f47c744387bd6a27515f
+[0] Fixed missing id for RSVP with _id 6851e3dc876b4618cdb3c779
+[0] Fixed missing id for RSVP with _id 68509778fb80a5acdaabdd1b
+[0] Fixed missing id for RSVP with _id 683db7a3de654e95b03579dd
+[0] Fixed missing firstName for RSVP with id 683db7a3de654e95b03579dd
+[0] Fixed missing lastName for RSVP with id 683db7a3de654e95b03579dd
+[0] Fixed missing id for RSVP with _id 6827c55183dab120033598fc
+[0] Fixed missing firstName for RSVP with id 6827c55183dab120033598fc
+[0] Fixed missing lastName for RSVP with id 6827c55183dab120033598fc
+[0] Fixed missing id for RSVP with _id 68279a3a83dab120033598b4
+[0] Fixed missing firstName for RSVP with id 68279a3a83dab120033598b4
+[0] Fixed missing lastName for RSVP with id 68279a3a83dab120033598b4
+[0] Fixed missing id for RSVP with _id 6827948a83dab120033598a8
+[0] Fixed missing firstName for RSVP with id 6827948a83dab120033598a8
+[0] Fixed missing lastName for RSVP with id 6827948a83dab120033598a8
+[0] Fixed missing id for RSVP with _id 6825c298d9d217c2636334f4
+[0] Fixed missing firstName for RSVP with id 6825c298d9d217c2636334f4
+[0] Fixed missing lastName for RSVP with id 6825c298d9d217c2636334f4
+[0] Fixed missing id for RSVP with _id 68232cc6f0a19fb98f98e557
+[0] Fixed missing firstName for RSVP with id 68232cc6f0a19fb98f98e557
+[0] Fixed missing lastName for RSVP with id 68232cc6f0a19fb98f98e557
+[0] Fixed missing id for RSVP with _id 68231b95f0a19fb98f98e531
+[0] Fixed missing firstName for RSVP with id 68231b95f0a19fb98f98e531
+[0] Fixed missing lastName for RSVP with id 68231b95f0a19fb98f98e531
+[0] Fixed missing id for RSVP with _id 68231756f0a19fb98f98e4fe
+[0] Fixed missing firstName for RSVP with id 68231756f0a19fb98f98e4fe
+[0] Fixed missing lastName for RSVP with id 68231756f0a19fb98f98e4fe
+[1]  GET /favicon.ico 200 in 217ms
+[1]  GET /admin/guests 200 in 73ms
+[1]  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 83ms
+[1]  GET /favicon.ico 200 in 210ms
+[1]  GET /admin-avatar.jpg 404 in 68ms
+[0] Fixed missing id for RSVP with _id 6859e25dada948a7ef42f1c1
+[0] Fixed missing id for RSVP with _id 68579358b2dc35e4e08dc0a8
+[0] Fixed missing id for RSVP with _id 68578ca2369d71a3a72e64b3
+[0] Fixed missing id for RSVP with _id 68577fd0c5509e3e0333a950
+[0] Fixed missing id for RSVP with _id 68555faa01755f6f59bff6c5
+[0] Fixed missing id for RSVP with _id 6851f47c744387bd6a27515f
+[0] Fixed missing id for RSVP with _id 6851e3dc876b4618cdb3c779
+[0] Fixed missing id for RSVP with _id 68509778fb80a5acdaabdd1b
+[0] Fixed missing id for RSVP with _id 683db7a3de654e95b03579dd
+[0] Fixed missing firstName for RSVP with id 683db7a3de654e95b03579dd
+[0] Fixed missing lastName for RSVP with id 683db7a3de654e95b03579dd
+[0] Fixed missing id for RSVP with _id 6827c55183dab120033598fc
+[0] Fixed missing firstName for RSVP with id 6827c55183dab120033598fc
+[0] Fixed missing lastName for RSVP with id 6827c55183dab120033598fc
+[0] Fixed missing id for RSVP with _id 68279a3a83dab120033598b4
+[0] Fixed missing firstName for RSVP with id 68279a3a83dab120033598b4
+[0] Fixed missing lastName for RSVP with id 68279a3a83dab120033598b4
+[0] Fixed missing id for RSVP with _id 6827948a83dab120033598a8
+[0] Fixed missing firstName for RSVP with id 6827948a83dab120033598a8
+[0] Fixed missing lastName for RSVP with id 6827948a83dab120033598a8
+[0] Fixed missing id for RSVP with _id 6825c298d9d217c2636334f4
+[0] Fixed missing firstName for RSVP with id 6825c298d9d217c2636334f4
+[0] Fixed missing lastName for RSVP with id 6825c298d9d217c2636334f4
+[0] Fixed missing id for RSVP with _id 68232cc6f0a19fb98f98e557
+[0] Fixed missing firstName for RSVP with id 68232cc6f0a19fb98f98e557
+[0] Fixed missing lastName for RSVP with id 68232cc6f0a19fb98f98e557
+[0] Fixed missing id for RSVP with _id 68231b95f0a19fb98f98e531
+[0] Fixed missing firstName for RSVP with id 68231b95f0a19fb98f98e531
+[0] Fixed missing lastName for RSVP with id 68231b95f0a19fb98f98e531
+[0] Fixed missing id for RSVP with _id 68231756f0a19fb98f98e4fe
+[0] Fixed missing firstName for RSVP with id 68231756f0a19fb98f98e4fe
+[0] Fixed missing lastName for RSVP with id 68231756f0a19fb98f98e4fe
+[0] Fixed missing id for RSVP with _id 6859e25dada948a7ef42f1c1
+[0] Fixed missing id for RSVP with _id 68579358b2dc35e4e08dc0a8
+[0] Fixed missing id for RSVP with _id 68578ca2369d71a3a72e64b3
+[0] Fixed missing id for RSVP with _id 68577fd0c5509e3e0333a950
+[0] Fixed missing id for RSVP with _id 68555faa01755f6f59bff6c5
+[0] Fixed missing id for RSVP with _id 6851f47c744387bd6a27515f
+[0] Fixed missing id for RSVP with _id 6851e3dc876b4618cdb3c779
+[0] Fixed missing id for RSVP with _id 68509778fb80a5acdaabdd1b
+[0] Fixed missing id for RSVP with _id 683db7a3de654e95b03579dd
+[0] Fixed missing firstName for RSVP with id 683db7a3de654e95b03579dd
+[0] Fixed missing lastName for RSVP with id 683db7a3de654e95b03579dd
+[0] Fixed missing id for RSVP with _id 6827c55183dab120033598fc
+[0] Fixed missing firstName for RSVP with id 6827c55183dab120033598fc
+[0] Fixed missing lastName for RSVP with id 6827c55183dab120033598fc
+[0] Fixed missing id for RSVP with _id 68279a3a83dab120033598b4
+[0] Fixed missing firstName for RSVP with id 68279a3a83dab120033598b4
+[0] Fixed missing lastName for RSVP with id 68279a3a83dab120033598b4
+[0] Fixed missing id for RSVP with _id 6827948a83dab120033598a8
+[0] Fixed missing firstName for RSVP with id 6827948a83dab120033598a8
+[0] Fixed missing lastName for RSVP with id 6827948a83dab120033598a8
+[0] Fixed missing id for RSVP with _id 6825c298d9d217c2636334f4
+[0] Fixed missing firstName for RSVP with id 6825c298d9d217c2636334f4
+[0] Fixed missing lastName for RSVP with id 6825c298d9d217c2636334f4
+[0] Fixed missing id for RSVP with _id 68232cc6f0a19fb98f98e557
+[0] Fixed missing firstName for RSVP with id 68232cc6f0a19fb98f98e557
+[0] Fixed missing lastName for RSVP with id 68232cc6f0a19fb98f98e557
+[0] Fixed missing id for RSVP with _id 68231b95f0a19fb98f98e531
+[0] Fixed missing firstName for RSVP with id 68231b95f0a19fb98f98e531
+[0] Fixed missing lastName for RSVP with id 68231b95f0a19fb98f98e531
+[0] Fixed missing id for RSVP with _id 68231756f0a19fb98f98e4fe
+[0] Fixed missing firstName for RSVP with id 68231756f0a19fb98f98e4fe
+[0] Fixed missing lastName for RSVP with id 68231756f0a19fb98f98e4fe
+[1]  GET /favicon.ico 200 in 226ms
+[1]  GET /admin/guests 200 in 87ms
+[1]  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 93ms
+[1]  GET /favicon.ico 200 in 222ms
+[1]  GET /admin-avatar.jpg 404 in 79ms
+[0] Fixed missing id for RSVP with _id 6859e25dada948a7ef42f1c1
+[0] Fixed missing id for RSVP with _id 68579358b2dc35e4e08dc0a8
+[0] Fixed missing id for RSVP with _id 68578ca2369d71a3a72e64b3
+[0] Fixed missing id for RSVP with _id 68577fd0c5509e3e0333a950
+[0] Fixed missing id for RSVP with _id 68555faa01755f6f59bff6c5
+[0] Fixed missing id for RSVP with _id 6851f47c744387bd6a27515f
+[0] Fixed missing id for RSVP with _id 6851e3dc876b4618cdb3c779
+[0] Fixed missing id for RSVP with _id 68509778fb80a5acdaabdd1b
+[0] Fixed missing id for RSVP with _id 683db7a3de654e95b03579dd
+[0] Fixed missing firstName for RSVP with id 683db7a3de654e95b03579dd
+[0] Fixed missing lastName for RSVP with id 683db7a3de654e95b03579dd
+[0] Fixed missing id for RSVP with _id 6827c55183dab120033598fc
+[0] Fixed missing firstName for RSVP with id 6827c55183dab120033598fc
+[0] Fixed missing lastName for RSVP with id 6827c55183dab120033598fc
+[0] Fixed missing id for RSVP with _id 68279a3a83dab120033598b4
+[0] Fixed missing firstName for RSVP with id 68279a3a83dab120033598b4
+[0] Fixed missing lastName for RSVP with id 68279a3a83dab120033598b4
+[0] Fixed missing id for RSVP with _id 6827948a83dab120033598a8
+[0] Fixed missing firstName for RSVP with id 6827948a83dab120033598a8
+[0] Fixed missing lastName for RSVP with id 6827948a83dab120033598a8
+[0] Fixed missing id for RSVP with _id 6825c298d9d217c2636334f4
+[0] Fixed missing firstName for RSVP with id 6825c298d9d217c2636334f4
+[0] Fixed missing lastName for RSVP with id 6825c298d9d217c2636334f4
+[0] Fixed missing id for RSVP with _id 68232cc6f0a19fb98f98e557
+[0] Fixed missing firstName for RSVP with id 68232cc6f0a19fb98f98e557
+[0] Fixed missing lastName for RSVP with id 68232cc6f0a19fb98f98e557
+[0] Fixed missing id for RSVP with _id 68231b95f0a19fb98f98e531
+[0] Fixed missing firstName for RSVP with id 68231b95f0a19fb98f98e531
+[0] Fixed missing lastName for RSVP with id 68231b95f0a19fb98f98e531
+[0] Fixed missing id for RSVP with _id 68231756f0a19fb98f98e4fe
+[0] Fixed missing firstName for RSVP with id 68231756f0a19fb98f98e4fe
+[0] Fixed missing lastName for RSVP with id 68231756f0a19fb98f98e4fe
+[0] Fixed missing id for RSVP with _id 6859e25dada948a7ef42f1c1
+[0] Fixed missing id for RSVP with _id 68579358b2dc35e4e08dc0a8
+[0] Fixed missing id for RSVP with _id 68578ca2369d71a3a72e64b3
+[0] Fixed missing id for RSVP with _id 68577fd0c5509e3e0333a950
+[0] Fixed missing id for RSVP with _id 68555faa01755f6f59bff6c5
+[0] Fixed missing id for RSVP with _id 6851f47c744387bd6a27515f
+[0] Fixed missing id for RSVP with _id 6851e3dc876b4618cdb3c779
+[0] Fixed missing id for RSVP with _id 68509778fb80a5acdaabdd1b
+[0] Fixed missing id for RSVP with _id 683db7a3de654e95b03579dd
+[0] Fixed missing firstName for RSVP with id 683db7a3de654e95b03579dd
+[0] Fixed missing lastName for RSVP with id 683db7a3de654e95b03579dd
+[0] Fixed missing id for RSVP with _id 6827c55183dab120033598fc
+[0] Fixed missing firstName for RSVP with id 6827c55183dab120033598fc
+[0] Fixed missing lastName for RSVP with id 6827c55183dab120033598fc
+[0] Fixed missing id for RSVP with _id 68279a3a83dab120033598b4
+[0] Fixed missing firstName for RSVP with id 68279a3a83dab120033598b4
+[0] Fixed missing lastName for RSVP with id 68279a3a83dab120033598b4
+[0] Fixed missing id for RSVP with _id 6827948a83dab120033598a8
+[0] Fixed missing firstName for RSVP with id 6827948a83dab120033598a8
+[0] Fixed missing lastName for RSVP with id 6827948a83dab120033598a8
+[0] Fixed missing id for RSVP with _id 6825c298d9d217c2636334f4
+[0] Fixed missing firstName for RSVP with id 6825c298d9d217c2636334f4
+[0] Fixed missing lastName for RSVP with id 6825c298d9d217c2636334f4
+[0] Fixed missing id for RSVP with _id 68232cc6f0a19fb98f98e557
+[0] Fixed missing firstName for RSVP with id 68232cc6f0a19fb98f98e557
+[0] Fixed missing lastName for RSVP with id 68232cc6f0a19fb98f98e557
+[0] Fixed missing id for RSVP with _id 68231b95f0a19fb98f98e531
+[0] Fixed missing firstName for RSVP with id 68231b95f0a19fb98f98e531
+[0] Fixed missing lastName for RSVP with id 68231b95f0a19fb98f98e531
+[0] Fixed missing id for RSVP with _id 68231756f0a19fb98f98e4fe
+[0] Fixed missing firstName for RSVP with id 68231756f0a19fb98f98e4fe
+[0] Fixed missing lastName for RSVP with id 68231756f0a19fb98f98e4fe
+[1]  GET /favicon.ico 200 in 213ms
+[1]  GET /admin/guests 200 in 78ms
+[1]  GET /favicon.ico 200 in 211ms
+[1]  GET /admin-avatar.jpg 404 in 65ms
+[0] Fixed missing id for RSVP with _id 6859e25dada948a7ef42f1c1
+[0] Fixed missing id for RSVP with _id 68579358b2dc35e4e08dc0a8
+[0] Fixed missing id for RSVP with _id 68578ca2369d71a3a72e64b3
+[0] Fixed missing id for RSVP with _id 68577fd0c5509e3e0333a950
+[0] Fixed missing id for RSVP with _id 68555faa01755f6f59bff6c5
+[0] Fixed missing id for RSVP with _id 6851f47c744387bd6a27515f
+[0] Fixed missing id for RSVP with _id 6851e3dc876b4618cdb3c779
+[0] Fixed missing id for RSVP with _id 68509778fb80a5acdaabdd1b
+[0] Fixed missing id for RSVP with _id 683db7a3de654e95b03579dd
+[0] Fixed missing firstName for RSVP with id 683db7a3de654e95b03579dd
+[0] Fixed missing lastName for RSVP with id 683db7a3de654e95b03579dd
+[0] Fixed missing id for RSVP with _id 6827c55183dab120033598fc
+[0] Fixed missing firstName for RSVP with id 6827c55183dab120033598fc
+[0] Fixed missing lastName for RSVP with id 6827c55183dab120033598fc
+[0] Fixed missing id for RSVP with _id 68279a3a83dab120033598b4
+[0] Fixed missing firstName for RSVP with id 68279a3a83dab120033598b4
+[0] Fixed missing lastName for RSVP with id 68279a3a83dab120033598b4
+[0] Fixed missing id for RSVP with _id 6827948a83dab120033598a8
+[0] Fixed missing firstName for RSVP with id 6827948a83dab120033598a8
+[0] Fixed missing lastName for RSVP with id 6827948a83dab120033598a8
+[0] Fixed missing id for RSVP with _id 6825c298d9d217c2636334f4
+[0] Fixed missing firstName for RSVP with id 6825c298d9d217c2636334f4
+[0] Fixed missing lastName for RSVP with id 6825c298d9d217c2636334f4
+[0] Fixed missing id for RSVP with _id 68232cc6f0a19fb98f98e557
+[0] Fixed missing firstName for RSVP with id 68232cc6f0a19fb98f98e557
+[0] Fixed missing lastName for RSVP with id 68232cc6f0a19fb98f98e557
+[0] Fixed missing id for RSVP with _id 68231b95f0a19fb98f98e531
+[0] Fixed missing firstName for RSVP with id 68231b95f0a19fb98f98e531
+[0] Fixed missing lastName for RSVP with id 68231b95f0a19fb98f98e531
+[0] Fixed missing id for RSVP with _id 68231756f0a19fb98f98e4fe
+[0] Fixed missing firstName for RSVP with id 68231756f0a19fb98f98e4fe
+[0] Fixed missing lastName for RSVP with id 68231756f0a19fb98f98e4fe
+[0] Fixed missing id for RSVP with _id 6859e25dada948a7ef42f1c1
+[0] Fixed missing id for RSVP with _id 68579358b2dc35e4e08dc0a8
+[0] Fixed missing id for RSVP with _id 68578ca2369d71a3a72e64b3
+[0] Fixed missing id for RSVP with _id 68577fd0c5509e3e0333a950
+[0] Fixed missing id for RSVP with _id 68555faa01755f6f59bff6c5
+[0] Fixed missing id for RSVP with _id 6851f47c744387bd6a27515f
+[0] Fixed missing id for RSVP with _id 6851e3dc876b4618cdb3c779
+[0] Fixed missing id for RSVP with _id 68509778fb80a5acdaabdd1b
+[0] Fixed missing id for RSVP with _id 683db7a3de654e95b03579dd
+[0] Fixed missing firstName for RSVP with id 683db7a3de654e95b03579dd
+[0] Fixed missing lastName for RSVP with id 683db7a3de654e95b03579dd
+[0] Fixed missing id for RSVP with _id 6827c55183dab120033598fc
+[0] Fixed missing firstName for RSVP with id 6827c55183dab120033598fc
+[0] Fixed missing lastName for RSVP with id 6827c55183dab120033598fc
+[0] Fixed missing id for RSVP with _id 68279a3a83dab120033598b4
+[0] Fixed missing firstName for RSVP with id 68279a3a83dab120033598b4
+[0] Fixed missing lastName for RSVP with id 68279a3a83dab120033598b4
+[0] Fixed missing id for RSVP with _id 6827948a83dab120033598a8
+[0] Fixed missing firstName for RSVP with id 6827948a83dab120033598a8
+[0] Fixed missing lastName for RSVP with id 6827948a83dab120033598a8
+[0] Fixed missing id for RSVP with _id 6825c298d9d217c2636334f4
+[0] Fixed missing firstName for RSVP with id 6825c298d9d217c2636334f4
+[0] Fixed missing lastName for RSVP with id 6825c298d9d217c2636334f4
+[0] Fixed missing id for RSVP with _id 68232cc6f0a19fb98f98e557
+[0] Fixed missing firstName for RSVP with id 68232cc6f0a19fb98f98e557
+[0] Fixed missing lastName for RSVP with id 68232cc6f0a19fb98f98e557
+[0] Fixed missing id for RSVP with _id 68231b95f0a19fb98f98e531
+[0] Fixed missing firstName for RSVP with id 68231b95f0a19fb98f98e531
+[0] Fixed missing lastName for RSVP with id 68231b95f0a19fb98f98e531
+[0] Fixed missing id for RSVP with _id 68231756f0a19fb98f98e4fe
+[0] Fixed missing firstName for RSVP with id 68231756f0a19fb98f98e4fe
+[0] Fixed missing lastName for RSVP with id 68231756f0a19fb98f98e4fe
+[1]  GET /favicon.ico 200 in 212ms
+[1]  ○ Compiling / ...
+[1]  ✓ Compiled / in 5.1s (2897 modules)
+[1]  GET / 200 in 6340ms
+[0] [32m[nodemon] restarting due to changes...[39m
+[0] [32m[nodemon] starting `node server.js -p 4000`[39m
+[0] CORS configured for origins: http://localhost:3000, http://localhost:3001
+[0] Cookie secure setting: disabled (development environment)
+[0] [32m📂 Scanning static content in /home/agnes/Ricardo/WEDDING/noceflorale/backend/public[0m
+[0] [32m📄 Found 18 files/directories in public directory:[0m
+[0] [36m   - File: 404.html (9751 bytes)[0m
+[0] [36m   - Directory: _next/[0m
+[0] [36m   - Directory: admin/[0m
+[0] [36m   - File: admin.html (9258 bytes)[0m
+[0] [36m   - File: admin.txt (5388 bytes)[0m
+[0] [36m   - File: favicon.ico (25931 bytes)[0m
+[0] [36m   - File: file.svg (391 bytes)[0m
+[0] [36m   - File: globe.svg (1035 bytes)[0m
+[0] [36m   - Directory: images/[0m
+[0] [36m   - File: index.html (76641 bytes)[0m
+[0] [36m   - File: index.txt (4516 bytes)[0m
+[0] [36m   - File: login.html (8642 bytes)[0m
+[0] [36m   - File: login.txt (4684 bytes)[0m
+[0] [36m   - Directory: media/[0m
+[0] [36m   - File: next.svg (1375 bytes)[0m
+[0] [36m   - File: placeholder.jpg (11 bytes)[0m
+[0] [36m   - File: vercel.svg (128 bytes)[0m
+[0] [36m   - File: window.svg (385 bytes)[0m
+[0] Running in DEVELOPMENT mode
+[0] Server port: 4000
+[0] CORS origins: http://localhost:3000, http://localhost:3001
+[0] Running in DEVELOPMENT mode - will proxy frontend requests to Next.js dev server
+[0] MongoDB Connected: ac-3epoehk-shard-00-01.bnpgltz.mongodb.net
+[0] 🌱 Running seed data...
+[0] 🌱 Starting database seed process...
+[0] 🗓️ Database already has 6 schedule items, skipping seed.
+[0] 💒 Wedding details already exist, skipping seed.
+[0] ✅ Seed process completed!
+[0] ℹ️  Attempting to start server on port 4000
+[0] ⚠️  Port 4000 is already in use.
+[0] ⚠️  Trying alternative port: 4001...
+[0] ⚠️  Original port 4000 was in use. Using port 4001 instead.
+[0] 🚀 Server running in development mode
+[0] 🚀 GraphQL endpoint: http://localhost:4001/graphql
+[0] 🚀 Frontend app: http://localhost:4001
+[0] ℹ️  Port information saved to backend/current-port.txt
+[0] [32m[nodemon] restarting due to changes...[39m
+[0] [32m[nodemon] starting `node server.js -p 4000`[39m
+[0] CORS configured for origins: http://localhost:3000, http://localhost:3001
+[0] Cookie secure setting: disabled (development environment)
+[0] [32m📂 Scanning static content in /home/agnes/Ricardo/WEDDING/noceflorale/backend/public[0m
+[0] [32m📄 Found 18 files/directories in public directory:[0m
+[0] [36m   - File: 404.html (9751 bytes)[0m
+[0] [36m   - Directory: _next/[0m
+[0] [36m   - Directory: admin/[0m
+[0] [36m   - File: admin.html (9258 bytes)[0m
+[0] [36m   - File: admin.txt (5388 bytes)[0m
+[0] [36m   - File: favicon.ico (25931 bytes)[0m
+[0] [36m   - File: file.svg (391 bytes)[0m
+[0] [36m   - File: globe.svg (1035 bytes)[0m
+[0] [36m   - Directory: images/[0m
+[0] [36m   - File: index.html (76641 bytes)[0m
+[0] [36m   - File: index.txt (4516 bytes)[0m
+[0] [36m   - File: login.html (8642 bytes)[0m
+[0] [36m   - File: login.txt (4684 bytes)[0m
+[0] [36m   - Directory: media/[0m
+[0] [36m   - File: next.svg (1375 bytes)[0m
+[0] [36m   - File: placeholder.jpg (11 bytes)[0m
+[0] [36m   - File: vercel.svg (128 bytes)[0m
+[0] [36m   - File: window.svg (385 bytes)[0m
+[0] Running in DEVELOPMENT mode
+[0] Server port: 4000
+[0] CORS origins: http://localhost:3000, http://localhost:3001
+[0] Running in DEVELOPMENT mode - will proxy frontend requests to Next.js dev server
+[0] MongoDB Connected: ac-3epoehk-shard-00-00.bnpgltz.mongodb.net
+[0] 🌱 Running seed data...
+[0] 🌱 Starting database seed process...
+[0] 🗓️ Database already has 6 schedule items, skipping seed.
+[0] 💒 Wedding details already exist, skipping seed.
+[0] ✅ Seed process completed!
+[0] ℹ️  Attempting to start server on port 4000
+[0] 🚀 Server running in development mode
+[0] 🚀 GraphQL endpoint: http://localhost:4000/graphql
+[0] 🚀 Frontend app: http://localhost:4000
+[0] ℹ️  Port information saved to backend/current-port.txt
+[0] [32m[nodemon] restarting due to changes...[39m
+[0] [32m[nodemon] starting `node server.js -p 4000`[39m
+[0] CORS configured for origins: http://localhost:3000, http://localhost:3001
+[0] Cookie secure setting: disabled (development environment)
+[0] [32m📂 Scanning static content in /home/agnes/Ricardo/WEDDING/noceflorale/backend/public[0m
+[0] [32m📄 Found 18 files/directories in public directory:[0m
+[0] [36m   - File: 404.html (9751 bytes)[0m
+[0] [36m   - Directory: _next/[0m
+[0] [36m   - Directory: admin/[0m
+[0] [36m   - File: admin.html (9258 bytes)[0m
+[0] [36m   - File: admin.txt (5388 bytes)[0m
+[0] [36m   - File: favicon.ico (25931 bytes)[0m
+[0] [36m   - File: file.svg (391 bytes)[0m
+[0] [36m   - File: globe.svg (1035 bytes)[0m
+[0] [36m   - Directory: images/[0m
+[0] [36m   - File: index.html (76641 bytes)[0m
+[0] [36m   - File: index.txt (4516 bytes)[0m
+[0] [36m   - File: login.html (8642 bytes)[0m
+[0] [36m   - File: login.txt (4684 bytes)[0m
+[0] [36m   - Directory: media/[0m
+[0] [36m   - File: next.svg (1375 bytes)[0m
+[0] [36m   - File: placeholder.jpg (11 bytes)[0m
+[0] [36m   - File: vercel.svg (128 bytes)[0m
+[0] [36m   - File: window.svg (385 bytes)[0m
+[0] Running in DEVELOPMENT mode
+[0] Server port: 4000
+[0] CORS origins: http://localhost:3000, http://localhost:3001
+[0] Running in DEVELOPMENT mode - will proxy frontend requests to Next.js dev server
+[0] MongoDB Connected: ac-3epoehk-shard-00-01.bnpgltz.mongodb.net
+[0] 🌱 Running seed data...
+[0] 🌱 Starting database seed process...
+[0] 🗓️ Database already has 6 schedule items, skipping seed.
+[0] 💒 Wedding details already exist, skipping seed.
+[0] ✅ Seed process completed!
+[0] ℹ️  Attempting to start server on port 4000
+[0] ⚠️  Port 4000 is already in use.
+[0] ⚠️  Trying alternative port: 4001...
+[0] ⚠️  Original port 4000 was in use. Using port 4001 instead.
+[0] 🚀 Server running in development mode
+[0] 🚀 GraphQL endpoint: http://localhost:4001/graphql
+[0] 🚀 Frontend app: http://localhost:4001
+[0] ℹ️  Port information saved to backend/current-port.txt
+[1]  ✓ Compiled in 2.3s (2911 modules)
+[1]  ✓ Compiled in 1060ms (2911 modules)
+[1]  ✓ Compiled in 702ms (1406 modules)
+[1]  ✓ Compiled in 3.6s (2911 modules)
+[1]  GET / 200 in 965ms
+[1]  ○ Compiling /favicon.ico ...
+[1]  ✓ Compiled /favicon.ico in 1261ms (1521 modules)
+[1]  GET /favicon.ico 200 in 1680ms
+[0] npm run dev:backend exited with code SIGTERM
+[1] [?25h
+[1] npm run sync-port && npm run dev:frontend exited with code SIGTERM
