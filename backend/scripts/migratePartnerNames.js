@@ -12,7 +12,9 @@ const __dirname = path.dirname(__filename);
 let envLoaded = false;
 try {
   // Try loading from project root
-  const result = dotenv.config({ path: path.join(__dirname, '..', '..', '.env') });
+  const result = dotenv.config({
+    path: path.join(__dirname, '..', '..', '.env'),
+  });
   if (result.parsed) {
     envLoaded = true;
     console.log('Loaded .env from project root');
@@ -35,7 +37,9 @@ if (!envLoaded) {
 }
 
 // Hardcoded MongoDB URI as fallback (update this with your actual MongoDB URI)
-const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://aymardmb:Openmongo-75@cluster0.bnpgltz.mongodb.net/nocefloraledb?retryWrites=true&w=majority';
+const MONGO_URI =
+  process.env.MONGODB_URI ||
+  'mongodb+srv://aymardmb:Openmongo-75@cluster0.bnpgltz.mongodb.net/nocefloraledb?retryWrites=true&w=majority';
 
 if (!process.env.MONGO_URI) {
   console.log('Warning: Using hardcoded MongoDB URI as fallback');
@@ -95,27 +99,27 @@ const RSVP = mongoose.model('RSVP', rsvpSchema);
 // Function to migrate partner names
 const migratePartnerNames = async () => {
   const connection = await connectDB();
-  
+
   try {
     // Find all RSVPs that have partnerName or partnerEmail but might be missing partnerFirstName/partnerLastName
     const rsvps = await RSVP.find({
       $or: [
         { partnerName: { $exists: true, $ne: null, $ne: '' } },
-        { partnerEmail: { $exists: true, $ne: null, $ne: '' } }
+        { partnerEmail: { $exists: true, $ne: null, $ne: '' } },
       ],
-      guestType: 'couple'
+      guestType: 'couple',
     });
-    
+
     console.log(`Found ${rsvps.length} RSVPs to process`);
-    
+
     let updatedCount = 0;
-    
+
     for (const rsvp of rsvps) {
       let updated = false;
       const updates = {};
-      
+
       // Process partnerName if it exists and partnerFirstName/partnerLastName don't
-      if (rsvp.partnerName && (!rsvp.partnerFirstName && !rsvp.partnerLastName)) {
+      if (rsvp.partnerName && !rsvp.partnerFirstName && !rsvp.partnerLastName) {
         const nameParts = rsvp.partnerName.trim().split(' ');
         if (nameParts.length > 0) {
           updates.partnerFirstName = nameParts[0];
@@ -123,24 +127,35 @@ const migratePartnerNames = async () => {
           updated = true;
         }
       }
-      
+
       // If partner email exists but no partner name information at all, use the email prefix as first name
-      if (rsvp.partnerEmail && !rsvp.partnerFirstName && !rsvp.partnerLastName && !rsvp.partnerName) {
+      if (
+        rsvp.partnerEmail &&
+        !rsvp.partnerFirstName &&
+        !rsvp.partnerLastName &&
+        !rsvp.partnerName
+      ) {
         updates.partnerFirstName = rsvp.partnerEmail.split('@')[0] || 'Partner';
         updates.partnerLastName = '';
         updated = true;
       }
-      
+
       // If we have updates to apply
       if (updated) {
         await RSVP.findByIdAndUpdate(rsvp._id, { $set: updates });
         updatedCount++;
-        console.log(`Updated RSVP for ${rsvp.firstName} ${rsvp.lastName} (ID: ${rsvp._id})`);
-        console.log(`  Partner name set to: ${updates.partnerFirstName} ${updates.partnerLastName}`);
+        console.log(
+          `Updated RSVP for ${rsvp.firstName} ${rsvp.lastName} (ID: ${rsvp._id})`,
+        );
+        console.log(
+          `  Partner name set to: ${updates.partnerFirstName} ${updates.partnerLastName}`,
+        );
       }
     }
-    
-    console.log(`Migration completed. Updated ${updatedCount} out of ${rsvps.length} RSVPs.`);
+
+    console.log(
+      `Migration completed. Updated ${updatedCount} out of ${rsvps.length} RSVPs.`,
+    );
   } catch (error) {
     console.error('Error during migration:', error);
   } finally {
@@ -152,4 +167,3 @@ const migratePartnerNames = async () => {
 
 // Run the migration
 migratePartnerNames();
-

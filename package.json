@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "sync-port": "node scripts/update-port.js",
-    "dev": "NODE_ENV=development npm run dev:all",
+    "dev": "NODE_ENV=development concurrently \"npm run dev:backend\" \"npm run sync-port && npm run dev:frontend\"",
     "prod": "NODE_ENV=production npm start",
     "dev:frontend": "cd frontend && npm run dev",
     "dev:backend": "NODE_ENV=development cd backend && npm run dev",
@@ -26,7 +26,7 @@
     "install:frontend": "cd frontend && npm install critters && npm install",
     "install:backend": "cd backend && npm install",
     "build:backend": "cd backend && npm run build",
-    "build:frontend": "cd frontend && NEXT_PUBLIC_API_URL=https://noce-florale.onrender.com/graphql NODE_ENV=production npm run build",
+    "build:frontend": "cd frontend && NEXT_PUBLIC_API_URL=http://localhost:3002/graphql/graphql NODE_ENV=production npm run build",
     "build:frontend:dev": "cd frontend && NEXT_PUBLIC_API_URL=http://localhost:4000/graphql NODE_ENV=development npm run build",
     "build:frontend:prod": "cd frontend && NEXT_PUBLIC_API_URL=/graphql NODE_ENV=production npm run build",
     "postbuild": "echo \"Starting postbuild process...\" && mkdir -p backend/public && echo \"Copying static export...\" && cp -r frontend/out/. backend/public/ && echo \"Postbuild completed successfully. Static site exported to backend/public/\"",
@@ -43,6 +43,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "concurrently": "^8.2.2"
+    "concurrently": "^9.2.1"
   }
 }

@@ -12,7 +12,9 @@ const __dirname = path.dirname(__filename);
 let envLoaded = false;
 try {
   // Try loading from project root
-  const result = dotenv.config({ path: path.join(__dirname, '..', '..', '.env') });
+  const result = dotenv.config({
+    path: path.join(__dirname, '..', '..', '.env'),
+  });
   if (result.parsed) {
     envLoaded = true;
     console.log('Loaded .env from project root');
@@ -35,7 +37,7 @@ if (!envLoaded) {
 }
 
 // Hardcoded MongoDB URI as fallback (update this with your actual MongoDB URI)
-const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://aymardmb:Openmongo-75@cluster0.bnpgltz.mongodb.net/nocefloraledb?retryWrites=true&w=majority';
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/rsvps-db';
 
 if (!process.env.MONGO_URI) {
   console.log('Warning: Using hardcoded MongoDB URI as fallback');
@@ -96,7 +98,7 @@ const RSVP = mongoose.model('RSVP', rsvpSchema);
 // Function to migrate guest names
 const fixGuestNames = async () => {
   const connection = await connectDB();
-  
+
   try {
     // Find all RSVPs that have name but missing firstName/lastName
     const rsvps = await RSVP.find({
@@ -107,18 +109,20 @@ const fixGuestNames = async () => {
         { firstName: null },
         { lastName: null },
         { firstName: '' },
-        { lastName: '' }
-      ]
+        { lastName: '' },
+      ],
     });
-    
-    console.log(`Found ${rsvps.length} RSVPs with name field but missing firstName/lastName`);
-    
+
+    console.log(
+      `Found ${rsvps.length} RSVPs with name field but missing firstName/lastName`,
+    );
+
     let updatedCount = 0;
-    
+
     for (const rsvp of rsvps) {
       let updated = false;
       const updates = {};
-      
+
       // Process name if it exists and firstName/lastName don't
       if (rsvp.name) {
         const nameParts = rsvp.name.trim().split(' ');
@@ -128,14 +132,14 @@ const fixGuestNames = async () => {
           updated = true;
         }
       }
-      
+
       // If email exists but no name information at all, use the email prefix as first name
       if (!rsvp.name && !rsvp.firstName && !rsvp.lastName && rsvp.email) {
         updates.firstName = rsvp.email.split('@')[0] || 'Guest';
         updates.lastName = '';
         updated = true;
       }
-      
+
       // If we have updates to apply
       if (updated) {
         await RSVP.findByIdAndUpdate(rsvp._id, { $set: updates });
@@ -144,8 +148,10 @@ const fixGuestNames = async () => {
         console.log(`  Name set to: ${updates.firstName} ${updates.lastName}`);
       }
     }
-    
-    console.log(`Migration completed. Updated ${updatedCount} out of ${rsvps.length} RSVPs.`);
+
+    console.log(
+      `Migration completed. Updated ${updatedCount} out of ${rsvps.length} RSVPs.`,
+    );
   } catch (error) {
     console.error('Error during migration:', error);
   } finally {
@@ -157,4 +163,3 @@ const fixGuestNames = async () => {
 
 // Run the migration
 fixGuestNames();
-

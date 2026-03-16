@@ -6,9 +6,15 @@ import { setContext } from "@apollo/client/link/context";
 // Always use real API, no mocks
 const useMocks = false;
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+if (!API_URL) {
+  throw new Error("NEXT_PUBLIC_API_URL is not defined. Please check your .env file.");
+}
+
 // Create an HTTP link to the GraphQL endpoint with improved debugging
 const httpLink = createHttpLink({
-  uri: process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000/graphql", // Updated to use correct backend server port
+  uri: API_URL,
   fetchOptions: {
     mode: "cors", // Ensure CORS is set
     credentials: "include", // Include credentials if needed
@@ -22,7 +28,7 @@ const httpLink = createHttpLink({
 if (typeof window !== "undefined") {
   console.log(
     `📡 Apollo Client connecting to: ${
-      process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000/graphql"
+      process.env.NEXT_PUBLIC_API_URL || "http://localhost:3002/graphql"
     }`
   );
 }
@@ -68,7 +74,7 @@ const client = new ApolloClient({
       errorPolicy: "all", // Return data and errors from mutations
     },
   },
-  connectToDevTools: process.env.NODE_ENV !== "production", // Enable Apollo dev tools in development
+  devtools: { enabled: process.env.NODE_ENV !== "production" },
 });
 
 // Add a network monitor to debug API calls

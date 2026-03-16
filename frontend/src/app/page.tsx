@@ -4,14 +4,13 @@ import { useRef } from 'react';
 import Header from '@/components/header';
 import Hero from '@/components/hero';
 import EventDetails from '@/components/eventDetails';
-// import RsvpForm from "@/components/rsvpForm";
 import Gallery from '@/components/gallery';
 import Location from '@/components/location';
 import Footer from '@/components/footer';
 import UserProfile from '@/components/auth/userProfile';
 import { useAuth } from '@/contexts/AuthContext';
 import ScrollToTop from '@/components/scrollToTop';
-// import RsvpForm from '@/components/rsvp/RsvpForm';
+import RsvpForm from '@/components/rsvp/RsvpForm';
 
 export default function Home() {
   // Create refs for each section
@@ -47,9 +46,9 @@ export default function Home() {
         <div ref={galleryRef} id="gallery">
           <Gallery />
         </div>
-        {/* <div ref={rsvpRef} id="rsvp">
+        <div ref={rsvpRef} id="rsvp">
           <RsvpForm />
-        </div> */}
+        </div>
 
         {/* Conditionally render either the RSVP form or user profile */}
         {user ? (

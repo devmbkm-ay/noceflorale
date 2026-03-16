@@ -10,7 +10,7 @@ const client = new ApolloClient({
     // Ensure the URL has a protocol and host
     uri: process.env.NEXT_PUBLIC_API_URL?.startsWith('http') 
       ? process.env.NEXT_PUBLIC_API_URL 
-      : `https://noce-florale.onrender.com${process.env.NEXT_PUBLIC_API_URL || '/graphql'}`,
+      : `${process.env.NEXT_PUBLIC_API_URL || '/graphql'}`,
     fetch,
     headers: {
       'Content-Type': 'application/json',

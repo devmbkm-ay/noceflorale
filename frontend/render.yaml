@@ -1,9 +1,0 @@
-services:
-  - type: web
-    runtime: node
-    name: wedding-frontend
-    buildCommand: npm install && npm run build:frontend
-    startCommand: npm run start:frontend
-    envVars:
-      - key: NEXT_PUBLIC_API_URL
-        value: https://noce-florale.onrender.com/graphql
