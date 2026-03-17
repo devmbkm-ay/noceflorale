@@ -2,15 +2,18 @@
  "name": "noce-florale",
  "private": true,
  "workspaces": [
- "frontend",
- "backend"
+  "frontend",
+  "backend"
  ],
  "scripts": {
- "dev:frontend": "npm --prefix frontend run dev",
- "dev:backend": "npm --prefix backend run dev",
- "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\""
+  "dev:frontend": "npm --prefix frontend run dev",
+  "dev:backend": "npm --prefix backend run dev",
+  "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\""
  },
  "devDependencies": {
- "concurrently": "^9.2.1"
+  "concurrently": "^9.2.1"
+ },
+ "dependencies": {
+  "next": "^16.1.7"
  }
 }
