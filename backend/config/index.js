@@ -20,13 +20,14 @@ let corsOrigin = process.env.CORS_ORIGIN;
 // In development, ensure both 3000 and 3001 ports are included for local development
 if (!isProdEnv) {
   if (!corsOrigin) {
-    corsOrigin = "http://localhost:3000,http://localhost:3001";
-  } else if (!corsOrigin.includes("http://localhost:3001")) {
+    corsOrigin=process.env.CORS_ORIGIN
+    // corsOrigin = "http://localhost:3000,http://localhost:3001";
+  } else if (!corsOrigin.includes(process.env.CORS_ORIGIN)) {
     corsOrigin += ",http://localhost:3001";
   }
 } else if (!corsOrigin) {
   // In production, default to a safer setting
-  corsOrigin = "https://noce-florale.onrender.com";
+  corsOrigin = "https://noceflorale-frontend.vercel.app";
 }
 
 const corsOriginArray = corsOrigin.split(",").map((origin) => origin.trim());
