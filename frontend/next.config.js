@@ -105,7 +105,7 @@ const prodConfig = {
     optimizeCss: false,
   },
   // Disable static export to fix build issues
-  output: "export", // Temporarily disabled
+  
 
   // Production-specific asset configuration
   assetPrefix: "", // Empty string works for serving from the same domain
