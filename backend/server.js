@@ -33,6 +33,11 @@ const corsOptions = {
   origin: config.cors.origin, // Should be https://noceflorale-frontend.vercel.app from your env
   credentials: true,
 };
+
+// Manually handle preflight OPTIONS requests for all routes
+// This is a robust way to ensure they are handled before any other routing.
+app.options('*', cors(corsOptions));
+
 app.use(cors(corsOptions));
 
 // --- Standard Middleware ---
