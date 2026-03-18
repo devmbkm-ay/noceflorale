@@ -86,11 +86,12 @@ const startServer = async () => {
 
   // --- Start Server ---
   const port = process.env.PORT || 4000;
-  await new Promise((resolve) => httpServer.listen({ port }, resolve));
+  await new Promise((resolve) => httpServer.listen({ port:'0.0.0.0' }, resolve));
 
   console.log(`🚀 Server running in ${process.env.NODE_ENV || 'development'} mode`);
-  console.log(`🚀 GraphQL endpoint ready at http://localhost:${port}/graphql`);
-  console.log(`🔗 Accepting requests from: ${config.cors.origin}`);
+  // console.log(`🚀 GraphQL endpoint ready at http://localhost:${port}/graphql`);
+  // console.log(`🔗 Accepting requests from: ${config.cors.origin}`);
+  console.log(`🚀 GraphQL endpoint ready at http://0.0.0.0:${port}/graphql`);
 };
 
 startServer().catch(error => {
