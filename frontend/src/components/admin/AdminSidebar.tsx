@@ -155,7 +155,7 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
       {/* Admin Profile */}
       <div className={cn("p-4", (collapsed && !isMobile) ? "text-center" : "")}>
         <Avatar className={cn("h-10 w-10", (collapsed && !isMobile) ? "mx-auto" : "")}>
-          <AvatarImage src='/admin-avatar.jpg' alt='Admin' />
+          <AvatarImage src='/admin-avatar.svg' alt='Admin' />
           <AvatarFallback>A</AvatarFallback>
         </Avatar>
         {(!collapsed || isMobile) && (
