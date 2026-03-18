@@ -31,14 +31,14 @@ const httpServer = http.createServer(app);
 // The cors middleware will automatically handle the OPTIONS preflight requests.
 const corsOptions = {
   origin: config.cors.origin, // Should be https://noceflorale-frontend.vercel.app from your env
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
+  preflightContinue: false,
+  optionsSuccessStatus: 204
 };
-
-// Manually handle preflight OPTIONS requests for all routes
-// This is a robust way to ensure they are handled before any other routing.
-app.options('*', cors(corsOptions));
-
 app.use(cors(corsOptions));
+app.options('*', cors(corsOptions)); // enable pre-flight across-the-board
+
 
 // --- Standard Middleware ---
 app.use(bodyParser.json({ limit: '50mb' }));
